@@ -169,8 +169,8 @@ class view:
             self.frameA, values=["FILME", "SERIE", "LIVRO"], width=180)
         buttonAdd = ct.CTkButton(self.frameA, text="Adicionar", width=180, height=30, font=(
             "arial bold", 15), command=lambda: [self.adicionarObra()])
-        buttonView = ct.CTkButton(
-            self.frameA, text="Ver obras", width=180, height=30, font=("arial bold", 15))
+        buttonView = ct.CTkButton(self.frameA, text="Ver obras", width=180, height=30, 
+            font=("arial bold", 15), command=lambda: [self.frameA.destroy(), self.seeObras()])
         buttonExit = ct.CTkButton(self.frameA, text="Sair", width=180, height=30, font=(
             "arial bold", 15), command=lambda: [self.frameA.destroy(), self.mainScreen()])
 
@@ -267,8 +267,8 @@ class view:
             self.frameU, values=["FILME", "SERIE", "LIVRO"], width=180)
         buttonUpdate = ct.CTkButton(self.frameU, text="Atualizar", width=180, height=30, font=(
             "arial bold", 15), command=lambda: [self.atualizarObra(id)])
-        buttonView = ct.CTkButton(
-            self.frameU, text="Ver obras", width=180, height=30, font=("arial bold", 15))
+        buttonView = ct.CTkButton(self.frameU, text="Ver obras", width=180, height=30, font=
+            ("arial bold", 15), command=lambda: [self.frameU.destroy(), self.seeObras()])
         buttonExit = ct.CTkButton(self.frameU, text="Sair", width=180, height=30, font=(
             "arial bold", 15), command=lambda: [self.frameU.destroy(), self.mainScreen()])
 

@@ -15,5 +15,17 @@ class Controller:
     def receberObra(self, nome, nomeObra, comentario, genero, nota, status, tipo):
         return self.model.addObra(nome, nomeObra, comentario, genero, nota, status, tipo)
 
-    def puxarObra(self, position):
-        return self.model.get_all_obras(position)
+    def puxarObra(self, usuario):
+        return self.model.getObraUser(usuario)
+
+    def contarObra(self, usuario):
+        return self.model.countObrasUser(usuario)
+
+    def deletarObra(self, id):
+        return self.model.deleteObra(id)
+
+    def PuxarObraId(self, id):
+        return self.model.getObraId(id)
+
+    def atualizarObraId(self, id, nomeObra, comentario, genero, nota, status, tipo):
+        return self.model.updateObra(id, nomeObra, comentario, genero, nota, status, tipo)

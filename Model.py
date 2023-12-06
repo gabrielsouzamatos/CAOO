@@ -29,27 +29,55 @@ class Model:
         return True
 
     def addObra(self, nome, nomeObra, comentario, genero, nota, status, tipo):
-        max_id_result = self.collectionObras.find_one(sort=[("_id", -1)])
+        maxIdResult = self.collectionObras.find_one(sort=[("_id", -1)])
         result = self.collectionObras.find_one({"Nome": nomeObra})
 
-        if max_id_result is None:
-            new_id = 1
+        if maxIdResult is None:
+            newId = 1
         else:
-            new_id = max_id_result["_id"] + 1
+            newId = maxIdResult["_id"] + 1
 
         if result == None:
-            self.collectionObras.insert_one({"_id": new_id, "Usuario": nome, "Nome": nomeObra, "Comentario": comentario,
+            self.collectionObras.insert_one({"_id": newId, "Usuario": nome, "Nome": nomeObra, "Comentario": comentario,
                                             "Genero": genero, "Nota": nota, "Status": status, "Tipo": tipo})
             return True
         return False
 
-    def get_all_obras(self, position):
+    def getObraUser(self, usuario):
         result = []
-        for x in self.collectionObras.find({}, {"_id": 0, "Nome": position, "Comentario": position, "Nota": position}):
+        for x in self.collectionObras.find({"Usuario": usuario}, {"_id": 1, "Nome": 1, "Comentario": 1, "Nota": 1}):
+            obra_id = x.get("_id", "")
             nome = x.get("Nome", "")
             comentario = x.get("Comentario", "")
             nota = x.get("Nota", "")
 
             result.append(
-                f"Nome: {nome} Comentario: {comentario} Nota: {nota}")
+                {"_id": obra_id, "Nome": nome, "Comentario": comentario, "Nota": nota}
+            )
+
         return result
+
+    def countObrasUser(self, usuario):
+        count = self.collectionObras.count_documents({"Usuario": usuario})
+        return count
+
+    def deleteObra(self, id):
+        self.collectionObras.delete_one({"_id": id})
+
+    def getObraId(self, id):
+        obraData = self.collectionObras.find_one({"_id": id})
+        return obraData
+
+    def updateObra(self, id, nomeObra, comentario, genero, nota, status, tipo):
+        result = self.collectionObras.update_one({"_id": id}, {"$set": {
+            "Nome": nomeObra,
+            "Comentario": comentario,
+            "Genero": genero,
+            "Nota": nota,
+            "Status": status,
+            "Tipo": tipo
+        }})
+
+        if result.modified_count == 1:
+            return True
+        return False

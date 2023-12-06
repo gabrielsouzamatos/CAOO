@@ -1,6 +1,5 @@
 import pymongo
 from pymongo import MongoClient
-import uuid
 
 
 class Model:

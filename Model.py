@@ -6,7 +6,7 @@ class Model:
 
     def __init__(self):
         cluster = MongoClient(
-            "mongodb+srv://gsmatos2014:xllnaSaLVssAXYvy@clustergabrielsm.yyg6p8a.mongodb.net/?retryWrites=true&w=majority")
+            "mongodb://localhost:27017")
         db = cluster["CaixaDeCartas"]
         self.collectionLogin = db["Login"]
         self.collectionObras = db["Obras"]
